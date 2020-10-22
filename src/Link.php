@@ -5,10 +5,10 @@ namespace Develtio\WP\Helpers;
 final class Link
 {
     /**
-     * @param array $value
+     * @param array|null $value
      * @return bool
      */
-    public static function isValid(array $value): bool
+    public static function isValid(?array $value): bool
     {
         return $value && array_key_exists('url', $value) && array_key_exists('title', $value);
     }
