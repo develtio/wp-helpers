@@ -5,12 +5,12 @@ namespace Develtio\WP\Helpers;
 final class Image
 {
     /**
-     * @param array|null $value
+     * @param $value
      * @return bool
      */
-    public static function isValid(?array $value): bool
+    public static function isValid($value): bool
     {
-        return $value && array_key_exists('url', $value) && array_key_exists('alt', $value);
+        return is_array($value) && $value['url'] && $value['alt'];
     }
 
     /**
