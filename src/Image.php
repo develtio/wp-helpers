@@ -10,7 +10,7 @@ final class Image
      */
     public static function isValid($value): bool
     {
-        return is_array($value) && $value['url'] && $value['alt'];
+        return is_array($value) && $value['url'] && array_key_exists('alt', $value);
     }
 
     /**
