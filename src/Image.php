@@ -18,14 +18,35 @@ final class Image
      * @param string $size
      * @return array|null
      */
-    public static function parseImage($image, $size = 'thumbnail')
+    public static function parseImage($image, string $size = 'thumbnail'): ?array
     {
         if (!self::isValid($image)) return null;
 
-        return [
-            'alt' => $image['alt'],
-            'url' => $image['sizes'][$size]
+        if (array_key_exists('sizes', $image)) {
+            return [
+                'url' => $image['sizes'][$size],
+                'alt' => $image['alt'],
+            ];
+        }
+
+        return $image;
+    }
+
+    /**
+     * @param int $id
+     * @param string $size
+     * @return array|null
+     */
+    public static function getAttachment(int $id, string $size = 'thumbnail'): ?array
+    {
+        $image = wp_get_attachment_image_src($id, $size);
+
+        $attachment = [
+            'url' => $image ? $image[0] : null,
+            'alt' => self::getAttachmentAlt($id),
         ];
+
+        return self::isValid($attachment) ? $attachment : null;
     }
 
     /**
