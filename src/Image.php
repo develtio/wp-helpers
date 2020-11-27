@@ -15,14 +15,14 @@ final class Image
 
     /**
      * @param $image
-     * @param string $size
+     * @param string|null $size
      * @return array|null
      */
-    public static function parseImage($image, string $size = 'thumbnail'): ?array
+    public static function parseImage($image, ?string $size = null): ?array
     {
         if (!self::isValid($image)) return null;
 
-        if (array_key_exists('sizes', $image)) {
+        if ($size && array_key_exists('sizes', $image) && array_key_exists($size, $image['sizes'])) {
             return [
                 'url' => $image['sizes'][$size],
                 'alt' => $image['alt'],
