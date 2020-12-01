@@ -16,6 +16,9 @@
       "homepage": "https://tomaszrusiecki.pl"
     }
   ],
+  "require": {
+    "php": ">=7.3"
+  },
   "config": {
     "optimize-autoloader": true
   },
