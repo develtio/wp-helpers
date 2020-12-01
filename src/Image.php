@@ -15,19 +15,14 @@ final class Image
 
     /**
      * @param int $id
-     * @param string $size
-     * @return array|null
+     * @param string|int[] $size
+     * @return string|null
      */
-    public static function getAttachment(int $id, string $size = 'thumbnail'): ?array
+    public static function getAttachmentSrc(int $id, $size = 'thumbnail'): ?string
     {
         $image = wp_get_attachment_image_src($id, $size);
 
-        $attachment = [
-            'url' => $image ? $image[0] : null,
-            'alt' => self::getAttachmentAlt($id),
-        ];
-
-        return self::isValid($attachment) ? $attachment : null;
+        return $image ? $image[0] : null;
     }
 
     /**
@@ -37,5 +32,20 @@ final class Image
     public static function getAttachmentAlt(int $id): string
     {
         return get_post_meta($id, '_wp_attachment_image_alt', true);
+    }
+
+    /**
+     * @param int $id
+     * @param string|int[] $size
+     * @return array|null
+     */
+    public static function getAttachment(int $id, $size = 'thumbnail'): ?array
+    {
+        $attachment = [
+            'url' => self::getAttachmentSrc($id),
+            'alt' => self::getAttachmentAlt($id),
+        ];
+
+        return self::isValid($attachment) ? $attachment : null;
     }
 }
