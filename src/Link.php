@@ -10,7 +10,7 @@ final class Link
      */
     public static function isValid($value): bool
     {
-        return is_array($value) && $value['url'] && $value['title'];
+        return is_array($value) && !empty($value['url']) && !empty($value['title']);
     }
 
     /**
