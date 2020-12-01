@@ -18,7 +18,7 @@ final class Image
      * @param string|int[] $size
      * @return string|null
      */
-    public static function getAttachmentSrc(int $id, $size = 'thumbnail'): ?string
+    public static function getAttachmentSrc(int $id, $size = ''): ?string
     {
         $image = wp_get_attachment_image_src($id, $size);
 
@@ -39,7 +39,7 @@ final class Image
      * @param string|int[] $size
      * @return array|null
      */
-    public static function getAttachment(int $id, $size = 'thumbnail'): ?array
+    public static function getAttachment(int $id, $size = ''): ?array
     {
         $attachment = [
             'url' => self::getAttachmentSrc($id),
