@@ -14,25 +14,6 @@ final class Image
     }
 
     /**
-     * @param $image
-     * @param string|null $size
-     * @return array|null
-     */
-    public static function parseImage($image, ?string $size = null): ?array
-    {
-        if (!self::isValid($image)) return null;
-
-        if ($size && array_key_exists('sizes', $image) && array_key_exists($size, $image['sizes'])) {
-            return [
-                'url' => $image['sizes'][$size],
-                'alt' => $image['alt'],
-            ];
-        }
-
-        return $image;
-    }
-
-    /**
      * @param int $id
      * @param string $size
      * @return array|null
